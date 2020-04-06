@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<meta name="robots" content="noindex">
+<html lang="en">
+<head>
+<meta name="description" content="hungerFm">
+  <meta charset="UTF-8">
+  <meta name="referrer" content="never">
+  <title>Hungoou Radio</title>
+
+  <link rel="stylesheet" href="http://at.alicdn.com/t/font_448304_47new50n1nabgldi.css">
+  <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="http://cdn.bootcss.com/animate.css/3.5.2/animate.min.css">
+<style id="jsbin-css">* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, main{
+  height: 100%;
+}
+
+body {
+  font: 14px/1.5 Arial;
+}
+
+a {
+  text-decoration: none;
+  color: #444;
+}
+
+ul,li{
+  list-style: none;
+}
+html,body,section {
+ height: 100%;
+ overflow: hidden;
+}
+
+.layout {
+  margin: 0 auto;
+  width: 600px;
+}
+
+@media (min-width: 700px) {
+  .layout {
+    width: 600px;
+  }
+}
+@media (min-width: 900px) {
+  .layout {
+    width: 800px;
+  }
+}
+@media (min-width: 1000px) {
+  .layout {
+    width: 900px;
+  }
+}
+@media (min-width: 1200px) {
+  .layout {
+    width: 1100px;
+  }
+}
+
+#page-cover {
+  display: none;
+}
+
+.bg {
+  position: absolute;
+  z-index: -1;
+  left: -10px;
+  top: -10px;
+  bottom: -10px;
+  right: -10px;
+  background: url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-big) center center no-repeat;
+  background-size: cover;
+  filter: blur(4px);
+}
+.bg::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0,0,0,0.4);  
+}
+
+main {
+  padding-top: 12vh;
+  height: calc(100% - 24vh); /* 1vh == 0.125px */
+}
+main::after{
+  content: '';
+  display: block;
+  clear: both;
+}
+
+
+
+main .aside {
+  float: left;
+}
+
+main .aside > figure{
+  width: 46vh;
+  height: 46vh;
+  background-image: url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-middle);
+  background-size: cover;
+  position-position: center center;
+}
+main .aside .actions {
+  display: flex;
+  margin-top: 4vh;
+}
+main .aside .iconfont{
+  flex: 1;
+  text-align: center;
+  font-size: 5vh;
+  color: rgba(255,255,255,0.4);
+  transition: color .4s;
+  cursor: pointer;
+}
+main .aside .iconfont:hover{
+  color: #fff;
+}
+
+
+main .detail {
+  margin-left: 56vh;
+  color: #fff;
+}
+main .detail .tag{
+  font-size: 2vh;
+  padding: .4em .8em;
+  background: #2e6eec;
+}
+main .detail h1{
+  font-size: 6vh;
+  margin-top: 2vh;
+}
+main .icons{
+  display: flex;
+  font-size: 3vh;
+  margin-top: 12vh;
+}
+main .icons li{
+  flex: 1;
+}
+main .icons .iconfont{
+  font-size: 3vh;
+  margin-right: 1vh;
+}
+main .area-bar{
+  margin-top: 10vh;
+  display: flex;
+  align-items: center;
+}
+main .area-bar .bar{
+  position: relative;
+  flex: 1;
+  height: .8vh;
+  border-radius: .2vh;
+  background: rgba(255, 255, 255, 0.4);
+}
+main .area-bar .current-time{
+  width: 3vh;
+  font-size: 2vh;
+  margin-left: 1vh;
+}
+main .area-bar .bar-progress{
+  position: absolute;
+  height: .8vh;
+  width: 10%;
+  background-color: #fff;
+  border-radius: .2vh;
+  transition: width .8s;
+}
+
+main .author {
+  font-size: 3vh;
+  margin-top: 3vh;
+}
+main .lyric {
+  font-size: 2vh;
+  margin-top: 2vh;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+
+
+footer {
+  height: 24vh;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0px -.25vh .25vh .25vh rgba(255,255,255,0.2);
+}
+footer>.layout{
+  position: relative;
+}
+footer .box {
+  position: relative;
+  overflow: hidden;
+  height: 24vh;
+}
+footer ul{
+  position: absolute;
+  left: 0;
+}
+footer ul:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+footer li{
+  float: left;
+  margin-top: 1vh;
+  margin: 2vh 2vh 0 2vh;
+  width: 20vh;
+  height: 20vh;
+
+  text-align: center;
+  cursor: pointer;
+}
+footer li:hover {
+  box-shadow: 0 0 .5vh .5vh rgba(255,255,255,0.8);
+}
+footer li .cover {
+  height: 16vh;
+  background-size: cover;
+  background-position: center center;
+}
+footer h3{
+  font-size: 2vh;
+  color: rgba(255,255,255,0.6);
+  margin-top: 1vh;
+}
+footer li.active {
+  box-shadow: 0 0 .5vh .5vh rgba(255,255,255,0.8);
+
+}
+
+footer .iconfont {
+  position: absolute;
+  top: 4vh;
+  font-size: 6vh;
+  color: rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  transition: all .4s;
+  cursor: pointer;
+}
+footer:hover .iconfont {
+  opacity: 1;
+}
+footer .iconfont:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+footer .icon-left {
+  left: -8vh;
+}
+footer .icon-right {
+  right: -8vh;
+}
+
+.boomText {
+  display: inline-block;
+  opacity: 0;
+}</style>
+</head>
+<body>
+  <section id="page-music">
+    <main class="layout">
+      <div class="aside">
+        <figure></figure>
+        <div class="actions">
+          <span class="btn-collect iconfont icon-heart"></span>
+          <span class="btn-play iconfont icon-pause"></span>
+          <span class="btn-next iconfont icon-next"></span>
+        </div>
+      </div>
+      <div class="detail">
+        <span class="tag">90后</span>
+        <h1>It's a new day</h1>
+        <ul class="icons">
+          <li><span class="iconfont icon-earphone"></span>3333</li>
+          <li><span class="iconfont icon-heart"></span>128</li>
+          <li><span class="iconfont icon-like"> </span>20</li>
+        </ul>
+        <div class="area-bar">
+          <div class="bar">
+            <div class="bar-progress"></div>
+          </div>
+          <div class="current-time">1:02</div>
+        </div>
+        <div class="author">周杰伦</div>
+        <div class="lyric">
+          <p>hello  world</p>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="layout">
+        <span class="iconfont icon-left"></span>
+        <span class="iconfont icon-right"></span>
+        <div class="box">
+           <ul>
+             <li>
+              <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+               <h3>漫步春天</h3>
+             </li>
+             <li>
+              <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+               <h3>漫步春天</h3>
+             </li>
+             <li>
+              <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+               <h3>漫步春天</h3>
+             </li>
+             <li>
+              <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+               <h3>漫步春天</h3>
+             </li>
+           </ul> 
+        </div>        
+      </div>
+
+    </footer>
+  </section>
+  <section id="page-cover"></section>
+  <div class="bg"></div>
+  
+<script id="jsbin-javascript">var EventCenter = {
+  on: function on(type, handler) {
+    $(document).on(type, handler);
+  },
+  fire: function fire(type, data) {
+    $(document).trigger(type, data);
+  }
+}; // EventCenter.on('hello', function(e, data){
+//   console.log(data)
+// })
+// EventCenter.fire('hello', '你好')
+
+var Footer = {
+  init: function init() {
+    this.$footer = $('footer');
+    this.$ul = this.$footer.find('ul');
+    this.$box = this.$footer.find('.box');
+    this.$leftBtn = this.$footer.find('.icon-left');
+    this.$rightBtn = this.$footer.find('.icon-right');
+    this.isToEnd = false;
+    this.isToStart = true;
+    this.isAnimate = false;
+    this.bind();
+    this.render();
+  },
+  bind: function bind() {
+    var _this = this;
+
+    this.$rightBtn.on('click', function () {
+      if (_this.isAnimate) return;
+
+      var itemWidth = _this.$box.find('li').outerWidth(true);
+
+      var rowCount = Math.floor(_this.$box.width() / itemWidth);
+
+      if (!_this.isToEnd) {
+        _this.isAnimate = true;
+
+        _this.$ul.animate({
+          left: '-=' + rowCount * itemWidth
+        }, 400, function () {
+          _this.isAnimate = false;
+          _this.isToStart = false;
+
+          if (parseFloat(_this.$box.width()) - parseFloat(_this.$ul.css('left')) >= parseFloat(_this.$ul.css('width'))) {
+            _this.isToEnd = true;
+          }
+        });
+      }
+    });
+    this.$leftBtn.on('click', function () {
+      if (_this.isAnimate) return;
+
+      var itemWidth = _this.$box.find('li').outerWidth(true);
+
+      var rowCount = Math.floor(_this.$box.width() / itemWidth);
+
+      if (!_this.isToStart) {
+        _this.isAnimate = true;
+
+        _this.$ul.animate({
+          left: '+=' + rowCount * itemWidth
+        }, 400, function () {
+          _this.isAnimate = false;
+          _this.isToEnd = false;
+
+          if (parseFloat(_this.$ul.css('left')) >= 0) {
+            _this.isToStart = true;
+          }
+        });
+      }
+    });
+    this.$footer.on('click', 'li', function () {
+      $(this).addClass('active').siblings().removeClass('active');
+      EventCenter.fire('select-albumn', {
+        channelId: $(this).attr('data-channel-id'),
+        channelName: $(this).attr('data-channel-name')
+      });
+    });
+  },
+  render: function render() {
+    var _this = this;
+
+    $.getJSON('//jirenguapi.applinzi.com/fm/getChannels.php').done(function (ret) {
+      console.log(ret);
+
+      _this.renderFooter(ret.channels);
+    }).fail(function () {
+      console.log('error');
+    });
+  },
+  renderFooter: function renderFooter(channels) {
+    console.log(channels);
+    var html = '';
+    channels.forEach(function (channel) {
+      html += '<li data-channel-id=' + channel.channel_id + ' data-channel-name=' + channel.name + '>' + '  <div class="cover" style="background-image:url(' + channel.cover_small + ')"></div>' + '  <h3>' + channel.name + '</h3>' + '</li>';
+    });
+    this.$ul.html(html);
+    this.setStyle();
+  },
+  setStyle: function setStyle() {
+    var count = this.$footer.find('li').length;
+    var width = this.$footer.find('li').outerWidth(true);
+    console.log(count, width);
+    this.$ul.css({
+      width: count * width + 'px'
+    });
+  }
+};
+var Fm = {
+  init: function init() {
+    this.$container = $('#page-music');
+    this.audio = new Audio();
+    this.audio.autoplay = true;
+    this.bind();
+  },
+  bind: function bind() {
+    var _this = this;
+
+    EventCenter.on('select-albumn', function (e, channelObj) {
+      _this.channelId = channelObj.channelId;
+      _this.channelName = channelObj.channelName;
+
+      _this.loadMusic();
+    });
+    this.$container.find('.btn-play').on('click', function () {
+      var $btn = $(this);
+
+      if ($btn.hasClass('icon-play')) {
+        $btn.removeClass('icon-play').addClass('icon-pause');
+
+        _this.audio.play();
+      } else {
+        $btn.removeClass('icon-pause').addClass('icon-play');
+
+        _this.audio.pause();
+      }
+    });
+    this.$container.find('.btn-next').on('click', function () {
+      _this.loadMusic();
+    });
+    this.audio.addEventListener('play', function () {
+      clearInterval(_this.statusClock);
+      _this.statusClock = setInterval(function () {
+        _this.updateStatus();
+      }, 1000);
+    });
+    this.audio.addEventListener('pause', function () {
+      clearInterval(_this.statusClock);
+      console.log('pause');
+    });
+  },
+  loadMusic: function loadMusic(callback) {
+    var _this = this;
+
+    console.log('loadMusic...');
+    $.getJSON('//jirenguapi.applinzi.com/fm/getSong.php', {
+      channel: this.channelId
+    }).done(function (ret) {
+      _this.song = ret['song'][0];
+
+      _this.setMusic();
+
+      _this.loadLyric();
+    });
+  },
+  loadLyric: function loadLyric() {
+    var _this = this;
+
+    $.getJSON('//jirenguapi.applinzi.com/fm/getLyric.php', {
+      sid: this.song.sid
+    }).done(function (ret) {
+      var lyric = ret.lyric;
+      var lyricObj = {};
+      lyric.split('\n').forEach(function (line) {
+        //[01:10.25][01:20.25]It a new day
+        var times = line.match(/\d{2}:\d{2}/g); //times == ['01:10.25', '01:20.25']
+
+        var str = line.replace(/\[.+?\]/g, '');
+
+        if (Array.isArray(times)) {
+          times.forEach(function (time) {
+            lyricObj[time] = str;
+          });
+        }
+      });
+      _this.lyricObj = lyricObj;
+    });
+  },
+  setMusic: function setMusic() {
+    console.log('set music...');
+    console.log(this.song);
+    this.audio.src = this.song.url;
+    $('.bg').css('background-image', 'url(' + this.song.picture + ')');
+    this.$container.find('.aside figure').css('background-image', 'url(' + this.song.picture + ')');
+    this.$container.find('.detail h1').text(this.song.title);
+    this.$container.find('.detail .author').text(this.song.artist);
+    this.$container.find('.tag').text(this.channelName);
+    this.$container.find('.btn-play').removeClass('icon-play').addClass('icon-pause');
+  },
+  updateStatus: function updateStatus() {
+    var min = Math.floor(this.audio.currentTime / 60);
+    var second = Math.floor(Fm.audio.currentTime % 60) + '';
+    second = second.length === 2 ? second : '0' + second;
+    this.$container.find('.current-time').text(min + ':' + second);
+    this.$container.find('.bar-progress').css('width', this.audio.currentTime / this.audio.duration * 100 + '%');
+    var line = this.lyricObj['0' + min + ':' + second];
+
+    if (line) {
+      this.$container.find('.lyric p').text(line).boomText();
+    }
+  }
+};
+
+$.fn.boomText = function (type) {
+  type = type || 'rollIn';
+  console.log(type);
+  this.html(function () {
+    var arr = $(this).text().split('').map(function (word) {
+      return '<span class="boomText">' + word + '</span>';
+    });
+    return arr.join('');
+  });
+  var index = 0;
+  var $boomTexts = $(this).find('span');
+  var clock = setInterval(function () {
+    $boomTexts.eq(index).addClass('animated ' + type);
+    index++;
+
+    if (index >= $boomTexts.length) {
+      clearInterval(clock);
+    }
+  }, 300);
+};
+
+Footer.init();
+Fm.init();</script>
+</body>
+</html>

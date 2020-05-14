@@ -73,7 +73,7 @@ let Footer = {
 
   render () {
     let _this = this
-    $.getJSON('http://jirenguapi.applinzi.com/fm/getChannels.php')
+    $.getJSON('http://jirenguapi.applinzi.com/fm/v2/getChannels.php')
       .done(function (ret) {
         _this.renderFooter(ret.channels)
       }).fail(function () {
@@ -86,7 +86,7 @@ let Footer = {
     channels.forEach(function (channel) {
       html += '<li data-channel-id=' + channel.channel_id + ' data-channel-name=' + channel.name + '>'
         + '  <div class="cover" style="background-image:url(' + channel.cover_small + ')"></div>'
-        + '  <h3>' + channel.name + '</h3>'
+        + '  <h3>' + "歌单" + '</h3>'
         + '</li>'
     })
     this.$ul.html(html)
@@ -149,7 +149,7 @@ let Fm = {
   },
   loadMusic () {
     let _this = this
-    $.getJSON('http://jirenguapi.applinzi.com/fm/getSong.php', { channel: this.channelId }).done(function (ret) {
+    $.getJSON('http://jirenguapi.applinzi.com/fm/v2/getSong.php', { channel: this.channelId }).done(function (ret) {
       _this.song = ret['song'][0]
       _this.setMusic()
       _this.loadLyric()
@@ -161,8 +161,8 @@ let Fm = {
     this.$container.find('.lyric p').text(line)
       .boomText()
   }
-    //let _this = this
-    // $.getJSON('http://jirenguapi.applinzi.com/fm/getLyric.php', { sid: this.song.sid }).done(function (ret) {
+    // let _this = this
+    // $.getJSON('http://jirenguapi.applinzi.com/fm/v2/getLyric.php', { sid: this.song.sid }).done(function (ret) {
     //   let lyric = ret.lyric
     //   console.log(ret)
     //   let lyricObj = {}
@@ -175,8 +175,8 @@ let Fm = {
     //       })
     //     }
     //   })
-    //_this.lyricObj = lyricObj
-    //})
+    // _this.lyricObj = lyricObj
+    // })
   },
 
   setMusic () {
@@ -194,7 +194,7 @@ let Fm = {
     second = second.length === 2 ? second : '0' + second
     this.$container.find('.current-time').text(min + ':' + second)
     this.$container.find('.bar-progress').css('width', this.audio.currentTime / this.audio.duration * 100 + '%')
-    //let line = this.lyricObj['0' + min + ':' + second]
+    // let line = this.lyricObj['0' + min + ':' + second]
     // if (line) {
     //   this.$container.find('.lyric p').text(line)
     //     .boomText()
